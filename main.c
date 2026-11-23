@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int main(){
-    List list = list_init();
+    List list = NULL;
     struct Node a, b, c;
     list = &a;
     a.val = 3;

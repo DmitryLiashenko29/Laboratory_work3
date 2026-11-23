@@ -2,11 +2,6 @@
 #include <stdlib.h>
 #include "stack.h"
 
-List init_list()
-{
-    return NULL;
-}
-
 void print_stack(List list){
     
     for(List pt = list ; pt!= NULL; pt = pt->next){
