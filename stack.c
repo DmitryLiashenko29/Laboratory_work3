@@ -16,10 +16,20 @@ void push(List *plist, Data x){
     p->val = x;
     *plist = p; 
 }
+int is_empty(List list){
+    return (list == NULL) ? 1 : 0;
+}
 
 Data pop(List *plist){
     List pt = *plist;
     Data res = pt->val;
+    *plist = pt->next;
     free(pt);
     return res;
+}
+
+void clear_stack(List *plist){
+    while(!is_empty(*plist)){
+        pop(plist);
+    }
 }
