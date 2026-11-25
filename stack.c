@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "stack.h"
 
 void print_stack(List list){
@@ -20,6 +18,9 @@ int is_empty(List list){
     return (list == NULL) ? 1 : 0;
 }
 
+Data get_pick(List list){
+    return list->val;
+}
 Data pop(List *plist){
     List pt = *plist;
     Data res = pt->val;
