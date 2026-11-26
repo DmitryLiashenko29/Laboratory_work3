@@ -1,36 +1,62 @@
 #include "stack.h"
 
-void print_stack(List list){
-    
-    for(List pt = list ; pt!= NULL; pt = pt->next){
-        printf("%d ", pt->val);
+void print_stack(Stack *pstack)
+{
+    for(Node *node = pstack->top; node!= NULL; node = node->next){
+        printf("%d ", node->val);
     }
     printf("\n");
 }
 
-void push(List *plist, Data x){
-    List p = (List)malloc(sizeof(struct Node)); // Выделили память под новый узел
-    p->next = *plist;
+void push(Stack *pstack, Data x)
+{
+    Node *p = (Node *)malloc(sizeof(Node)); // Выделили память под новый узел
+    if (p == NULL)
+    {
+        return;
+    }
+    p->next = pstack->top;
     p->val = x;
-    *plist = p; 
-}
-int is_empty(List list){
-    return (list == NULL) ? 1 : 0;
+    pstack->top = p; 
 }
 
-Data get_pick(List list){
-    return list->val;
-}
-Data pop(List *plist){
-    List pt = *plist;
-    Data res = pt->val;
-    *plist = pt->next;
-    free(pt);
-    return res;
+void init_stack(Stack *pstack)
+{
+    pstack->top = NULL;
 }
 
-void clear_stack(List *plist){
-    while(!is_empty(*plist)){
-        pop(plist);
+int is_empty(Stack *pstack)
+{
+    return (pstack->top == NULL) ? 1 : 0;
+}
+
+Data get_pick(Stack *pstack)
+{
+    if (!is_empty(pstack))
+    {
+        Node *node = pstack->top;
+        return node->val;
+    }
+    return INT_MIN;
+}
+
+Data pop(Stack *pstack)
+{
+    if (!is_empty(pstack))
+    {
+        Node *node = pstack->top;
+        Data res = node->val;
+        pstack->top = node->next;
+        free(node);
+        return res;
+    }
+    return INT_MIN;
+}
+
+void clear_stack(Stack *pstack)
+{
+    while(!is_empty(pstack))
+    {
+        pop(pstack);
     }
 }

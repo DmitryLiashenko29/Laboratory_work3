@@ -2,17 +2,22 @@
 #define STACK
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
 typedef int Data;
-struct Node {
+typedef struct Node{
     Data val;
     struct Node * next;
-};
-typedef struct Node * List;
+} Node;
 
-Data pop(List *plist);
-void push(List *plist, Data x);
-int is_empty(List list);
-void clear_stack(List *plist);
-void print_stack(List list);
-Data get_pick(List list);
+typedef struct{
+    Node * top;
+} Stack;
+
+Data pop(Stack *pstack);
+void push(Stack *pstack, Data x);
+void init_stack(Stack *pstack);
+int is_empty(Stack *pstack);
+void clear_stack(Stack *pstack);
+void print_stack(Stack *pstack);
+Data get_pick(Stack *pstack);
 #endif 
