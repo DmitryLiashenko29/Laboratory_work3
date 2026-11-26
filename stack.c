@@ -30,7 +30,7 @@ int is_empty(Stack *pstack)
     return (pstack->top == NULL) ? 1 : 0;
 }
 
-Data get_pick(Stack *pstack)
+Data get_peek(Stack *pstack)
 {
     if (!is_empty(pstack))
     {
@@ -51,6 +51,23 @@ Data pop(Stack *pstack)
         return res;
     }
     return INT_MIN;
+}
+
+int stack_size(Stack *pstack)
+{
+    int count = 0;
+    Stack temp;
+    init_stack(&temp);
+    while(!is_empty(pstack))
+    {
+        push(&temp, pop(pstack));
+        count ++;
+    }
+    while (!is_empty(&temp))
+    {
+        push(pstack, pop(&temp));
+    }
+    return count;
 }
 
 void clear_stack(Stack *pstack)

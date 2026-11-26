@@ -19,5 +19,7 @@ void init_stack(Stack *pstack);
 int is_empty(Stack *pstack);
 void clear_stack(Stack *pstack);
 void print_stack(Stack *pstack);
-Data get_pick(Stack *pstack);
+int stack_size(Stack *pstack);
+Data get_peek(Stack *pstack);
+
 #endif 
