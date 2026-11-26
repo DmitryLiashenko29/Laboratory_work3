@@ -1,7 +1,7 @@
 #include "stack.h"
 
-void insertion_sort(Stack *main_stack){
-
+void insertion_sort(Stack *main_stack)
+{
     Stack sorted_part;
     init_stack(&sorted_part);
     Stack temp;
@@ -21,7 +21,6 @@ void insertion_sort(Stack *main_stack){
     while (!is_empty(&sorted_part)){
         push(main_stack, pop(&sorted_part));
     }
-
 }
 
 void merge(Stack *sorted1, Stack *sorted2, Stack *merge_stack)
@@ -49,7 +48,33 @@ void merge(Stack *sorted1, Stack *sorted2, Stack *merge_stack)
     }
 }
 
-void merge_sort(Stack *pStack)
-{
+void split_stack(Stack *pstack, Stack *left_stack, Stack *right_stack){
+    int n = stack_size(pstack);
+    int k = n/2;
+    while (k > 0){
+        push (left_stack, pop(pstack));
+        k--;
+    }
+    while (!is_empty(pstack)){
+        push (right_stack, pop(pstack));
+    }
+}
 
+
+void merge_sort(Stack *pstack)
+{
+    if (stack_size(pstack) <= 1){
+        return;
+    }
+    Stack left_stack;
+    init_stack(&left_stack);
+    Stack right_stack;
+    init_stack(&right_stack);
+
+    split_stack(pstack, &left_stack, &right_stack);
+
+    merge_sort(&left_stack);
+    merge_sort(&right_stack);
+    
+    merge(&left_stack, &right_stack, pstack);
 }
